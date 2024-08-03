@@ -40,15 +40,18 @@ def add_to_list():
 
 def remove_from_list():
     display_list()
-    try:
-        removetask = int(input("What # would you like to remove from the list: ")) - 1
-        if removetask >= 0 and removetask < len(tasks):
-            task = tasks.pop(removetask)
-            print(f"Task'{removetask + 1}' has been removed from the list.")
-        else:
-            print(f"Task #{removetask + 1} is not in the list.")
-    except ValueError:
-        print("Please enter a valid number.")
+    if not tasks:
+        print("No tasks to be removed.")
+    else:
+        try:
+            removetask = int(input("What # would you like to remove from the list: ")) - 1
+            if removetask >= 0 and removetask < len(tasks):
+                task = tasks.pop(removetask)
+                print(f"Task'{removetask + 1}' has been removed from the list.")
+            else:
+                print(f"Task #{removetask + 1} is not in the list.")
+        except ValueError:
+            print("Please enter a valid number.")
 
 def save_tasks(filename='task.json'):
      with open(filename, 'w') as f:
@@ -89,8 +92,8 @@ if __name__ == '__main__':
         elif choice == "3":
             display_list()
         elif choice == "4":
+            print("Goodbye\n")
             save_tasks()
             break
         else:
            print("Invalid choice")
-        print("Goodbye\n")
